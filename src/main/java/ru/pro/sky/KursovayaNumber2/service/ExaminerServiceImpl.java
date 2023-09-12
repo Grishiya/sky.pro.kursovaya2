@@ -16,10 +16,11 @@ public class ExaminerServiceImpl implements ExaminerService {
     public ExaminerServiceImpl(QuestionService questionService) {
         this.questionService = questionService;
     }
+
     @Override
     public Collection<Question> getQuestions(int amount) {
         Set<Question> questionSet = new HashSet<>();
-        if (questionService.getAll().size()<amount) {
+        if (questionService.getAll().size() < amount) {
             throw new ExceededTheNumberOfQuestions("У нас нет столько вопросов.");
         }
         while (questionSet.size() < amount) {

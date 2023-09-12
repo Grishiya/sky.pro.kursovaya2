@@ -16,15 +16,15 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class ExaminerServiceImplTest {
-@Mock
+    @Mock
     JavaQuestionService javaQuestionService;
     @InjectMocks
     ExaminerServiceImpl underTest;
-    Question question=new Question(
+    Question question = new Question(
             "Что такое массив?",
             "Массив — это структура данных," +
                     " которая позволяет хранить несколько значений одного типа.");
-    Question question2=new Question("В чем разница между == и equals()?",
+    Question question2 = new Question("В чем разница между == и equals()?",
             "== сравнивает между собой значения примитивов,или равные ссылки объектов." +
                     "equals сравнивает сами объекты ");
     Collection<Question> allQuestion = new ArrayList<>(List.of(question, question2));
@@ -33,15 +33,15 @@ class ExaminerServiceImplTest {
     void getQuestions_checkQuestionGetQuestionsInCollection_returnedGetQuestions() {
         when(javaQuestionService.getAll()).thenReturn(allQuestion);
         Collection<Question> result = underTest.getQuestions(2);
-        assertEquals(2,result.size());
+        assertEquals(2, result.size());
     }
 
     @Test
     void getQuestions_theNumberOfDesiredQuestionsExceedsTheSizeOfTheQuestions_thrownMaxSizeAmountQuestion() {
-   when(javaQuestionService.getAll()).thenReturn(Collections.emptySet());
+        when(javaQuestionService.getAll()).thenReturn(Collections.emptySet());
         ExceededTheNumberOfQuestions exc = assertThrows(
                 ExceededTheNumberOfQuestions.class,
                 () -> underTest.getQuestions(3));
-        assertEquals("У нас нет столько вопросов.",exc.getMessage());
+        assertEquals("У нас нет столько вопросов.", exc.getMessage());
     }
 }

@@ -24,6 +24,8 @@ public class JavaQuestionService implements QuestionService {
     @Override
     public Question add(Question question) {
         questionSet.add(question);
+
+
         return question;
     }
 
