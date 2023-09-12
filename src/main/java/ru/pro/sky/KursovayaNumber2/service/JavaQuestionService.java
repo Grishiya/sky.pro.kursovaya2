@@ -5,11 +5,11 @@ import ru.pro.sky.KursovayaNumber2.dto.Question;
 import java.util.*;
 
 public class JavaQuestionService implements QuestionService {
-    private List<Question> questionList;
+    private Set<Question> questionSet;
     private final Random random;
 
     public JavaQuestionService() {
-        this.questionList = new ArrayList<>();
+        this.questionSet = new HashSet<>();
         random = new Random();
     }
 
@@ -23,23 +23,24 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public Question add(Question question) {
-        questionList.add(question);
+        questionSet.add(question);
         return question;
     }
 
     @Override
     public Question remove(Question question) {
-        questionList.remove(question);
+        questionSet.remove(question);
         return question;
     }
 
     @Override
     public Collection<Question> getAll() {
-        return questionList;
+        return questionSet;
     }
 
     @Override
     public Question getRandomQuestion() {
-        return questionList.get(random.nextInt(questionList.size()));
+        return questionSet.toArray(Question[]::new)[
+                random.nextInt(questionSet.size())];
     }
 }
