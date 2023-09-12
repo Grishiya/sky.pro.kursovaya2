@@ -1,8 +1,10 @@
 package ru.pro.sky.KursovayaNumber2.service;
 
+import org.springframework.stereotype.Service;
 import ru.pro.sky.KursovayaNumber2.dto.Question;
 
 import java.util.*;
+@Service
 
 public class JavaQuestionService implements QuestionService {
     private Set<Question> questionSet;

@@ -33,7 +33,7 @@ class ExaminerServiceImplTest {
     void getQuestions_checkQuestionGetQuestionsInCollection_returnedGetQuestions() {
         when(javaQuestionService.getAll()).thenReturn(allQuestion);
         Collection<Question> result = underTest.getQuestions(2);
-        assertEquals(2, result.size());
+        assertEquals(allQuestion,result);
     }
 
     @Test
