@@ -29,12 +29,7 @@ class ExaminerServiceImplTest {
                     "equals сравнивает сами объекты ");
     Collection<Question> allQuestion = new ArrayList<>(List.of(question, question2));
 
-    @Test
-    void getQuestions_checkQuestionGetQuestionsInCollection_returnedGetQuestions() {
-        when(javaQuestionService.getAll()).thenReturn(allQuestion);
-        Collection<Question> result = underTest.getQuestions(2);
-        assertEquals(allQuestion,result);
-    }
+
 
     @Test
     void getQuestions_theNumberOfDesiredQuestionsExceedsTheSizeOfTheQuestions_thrownMaxSizeAmountQuestion() {
@@ -43,5 +38,12 @@ class ExaminerServiceImplTest {
                 ExceededTheNumberOfQuestions.class,
                 () -> underTest.getQuestions(3));
         assertEquals("У нас нет столько вопросов.", exc.getMessage());
+    }
+    @Test
+    void getQuestions_checkQuestionGetQuestionsInCollection_returnedGetQuestions() {
+        when(javaQuestionService.getRandomQuestion()).thenReturn(question,question2);
+        when(javaQuestionService.getAll()).thenReturn(allQuestion);
+        Collection<Question> result = underTest.getQuestions(2);
+        assertEquals(2,result.size());
     }
 }
